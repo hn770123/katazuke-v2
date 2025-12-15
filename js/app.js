@@ -265,27 +265,26 @@ function renderHearingStep() {
 
     // オプションクリックイベント
     if (question.type === 'single') {
-        content.querySelectorAll('.hearing-option').forEach(opt => {
-            opt.addEventListener('click', () => {
+        content.querySelectorAll('input[type="radio"]').forEach(radio => {
+            radio.addEventListener('change', (e) => {
                 content.querySelectorAll('.hearing-option').forEach(o => o.classList.remove('selected'));
-                opt.classList.add('selected');
-                opt.querySelector('input').checked = true;
-                App.hearingAnswers[question.id] = opt.dataset.value;
+                const parent = e.target.closest('.hearing-option');
+                parent.classList.add('selected');
+                App.hearingAnswers[question.id] = e.target.value;
             });
         });
     } else {
-        content.querySelectorAll('.checkbox-option').forEach(opt => {
-            opt.addEventListener('click', () => {
-                opt.classList.toggle('selected');
-                const checkbox = opt.querySelector('input');
-                checkbox.checked = !checkbox.checked;
+        content.querySelectorAll('input[type="checkbox"]').forEach(checkbox => {
+            checkbox.addEventListener('change', (e) => {
+                const parent = e.target.closest('.checkbox-option');
+                parent.classList.toggle('selected', e.target.checked);
 
                 if (!App.hearingAnswers[question.id]) {
                     App.hearingAnswers[question.id] = [];
                 }
 
-                const value = opt.dataset.value;
-                if (checkbox.checked) {
+                const value = e.target.value;
+                if (e.target.checked) {
                     App.hearingAnswers[question.id].push(value);
                 } else {
                     App.hearingAnswers[question.id] = App.hearingAnswers[question.id].filter(v => v !== value);
@@ -924,7 +923,7 @@ function isIOS() {
 
 function isStandalone() {
     return window.matchMedia('(display-mode: standalone)').matches ||
-           window.navigator.standalone === true;
+        window.navigator.standalone === true;
 }
 
 // ========================================
