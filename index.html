@@ -56,6 +56,17 @@
                 </div>
 
                 <div class="dashboard" id="dashboard" style="display: none;">
+                    <!-- 今日のステータス表示 -->
+                    <div class="daily-status-card">
+                        <div class="daily-status-header">
+                            <span class="daily-status-label">今日のステータス</span>
+                            <button class="btn btn-small btn-outline" id="changeDailyStatusBtn">変更</button>
+                        </div>
+                        <div class="daily-status-tags" id="currentDailyStatus">
+                            <!-- JSで動的に挿入 -->
+                        </div>
+                    </div>
+
                     <!-- 現在のタスク -->
                     <div class="current-task-card">
                         <div class="time-badge" id="currentTimeBadge">朝</div>
@@ -284,6 +295,30 @@
                 <h3>タスク完了！</h3>
                 <p id="completeMessage">素晴らしい！続けていきましょう！</p>
                 <button class="btn btn-primary" id="closeModalBtn">OK</button>
+            </div>
+        </div>
+
+        <!-- デイリーステータスモーダル -->
+        <div class="modal" id="dailyStatusModal">
+            <div class="modal-content modal-large">
+                <div class="modal-header">
+                    <h3>📅 今日の予定を教えてください</h3>
+                    <p class="modal-subtitle">タスクをあなたの状況に合わせて調整します</p>
+                </div>
+                <div class="hearing-progress modal-progress">
+                    <div class="hearing-progress-bar">
+                        <div class="hearing-progress-fill" id="dailyStatusProgressFill"></div>
+                    </div>
+                    <span class="hearing-step" id="dailyStatusStep">1/5</span>
+                </div>
+                <div class="hearing-content" id="dailyStatusContent">
+                    <!-- 質問がJSで動的に挿入される -->
+                </div>
+                <div class="hearing-nav">
+                    <button class="btn btn-secondary" id="dailyStatusBackBtn" style="visibility: hidden;">戻る</button>
+                    <button class="btn btn-text" id="skipDailyStatusBtn">スキップ</button>
+                    <button class="btn btn-primary" id="dailyStatusNextBtn">次へ</button>
+                </div>
             </div>
         </div>
 
